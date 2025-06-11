@@ -1,0 +1,143 @@
+Encapsulation:
+--------------
+Encapsulation in Python describes the concept of bundling data and methods within a single unit.A class is an example of encapsulation as it binds all the data members (instance variables) and methods into a single unit.
+
+Access Modifiers:
+----------------
+Encapsulation can be achieved by declaring the data members and methods of a class either as private or protected. But In Python, we don’t have direct access modifiers like public, private, and protected. We can achieve this by using single underscore and double underscores.
+
+	* Public Member: Accessible anywhere from outside of class.
+		Ex : Self.name=name
+	* Private Member: Accessible within the class
+		Ex : Self.__age=age
+			
+	* Protected Member: Accessible within the class and its sub-classes
+		Ex : Self._salary=salary
+
+Public Member:
+--------------
+Public data members are accessible within and outside of a class. All member variables of the class are by default public.
+
+Example:
+-------
+class Employee:
+    # constructor
+    def __init__(self, name, salary):
+        # public data members
+        self.name = name
+        self.salary = salary
+
+    # public instance methods
+    def show(self):
+        print("Name: ", self.name, 'Salary:', self.salary)
+
+
+emp = Employee('Raju', 10000)
+
+# accessing public data members
+print("Name: ", emp.name, 'Salary:', emp.salary)
+
+# calling public method of the class
+emp.show()
+
+Private Member:
+---------------
+We can protect variables in the class by marking them private. To define a private variable add two underscores as a prefix at the start of a variable name.
+Private members are accessible only within the class, and we can’t access them directly from the class objects.
+
+Example:
+--------
+class Employee:
+    # constructor
+    def __init__(self, name, salary):
+        # public data member
+        self.name = name
+        # private member
+        self.__salary = salary
+
+# creating object of a class
+emp = Employee('Raju', 10000)
+
+# accessing private data members
+print('Salary:', emp.__salary)
+
+Note: the salary is a private variable ,we can’t access the private variable from the outside of that class
+
+We can access private members from outside of a class using the following two approaches
+
+	->Create public method to access private members
+	->Use name mangling
+
+Example:
+--------
+class Employee:
+    # constructor
+    def __init__(self, name, salary):
+        # public data member
+        self.name = name
+        # private member
+        self.__salary = salary
+
+    # public instance methods
+    def show(self):
+        # private members are accessible from a class
+        print("Name: ", self.name, 'Salary:', self.__salary)
+
+# creating object of a class
+emp = Employee('Rahul', 10000)
+
+# calling public method of the class
+emp.show()
+
+Name Mangling to access private members:
+---------------------------------------
+We can directly access private and protected variables from outside of a class through name mangling. The name mangling is created on an identifier by adding two leading underscores and one trailing underscore, like this _classname__dataMember, where classname is the current class, and data member is the private variable name.
+
+Example :
+--------
+class Employee:
+    # constructor
+    def __init__(self, name, salary):
+        # public data member
+        self.name = name
+        # private member
+        self.__salary = salary
+
+# creating object of a class
+emp = Employee('Rahul', 10000)
+
+print('Name:', emp.name)
+# direct access to private member using name mangling
+print('Salary:', emp._Employee__salary)
+
+Getters and Setters:
+-------------------
+The primary purpose of using getters and setters in object-oriented programs is to ensure data encapsulation. Use the getter method to access data members and the setter methods to modify the data members.
+In Python, private variables are not hidden fields like in other programmings language.
+
+Example:
+-------
+class Student:
+    def __init__(self, name, age):
+        # private member
+        self.name = name
+        self.__age = age
+
+    # getter method
+    def get_age(self):
+        return self.__age
+
+    # setter method
+    def set_age(self, age):
+        self.__age = age
+
+stud = Student('Rahul', 14)
+
+# retrieving age using getter
+print('Name:', stud.name, stud.get_age())
+
+# changing age using setter
+stud.set_age(16)
+
+# retrieving age using getter
+print('Name:', stud.name, stud.get_age())
